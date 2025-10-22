@@ -1,0 +1,99 @@
+name: Build and Publish Hyprland Debs (Debian 13)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:trixie-slim
+      options: --privileged
+
+    steps:
+      - name: Install required build tools
+        run: |
+          apt-get update
+          apt-get install -y \
+            git curl gnupg lsb-release ca-certificates \
+            apt-utils apt-transport-https \
+            docker.io dpkg-dev fakeroot gzip
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t hyprland-debs .
+
+      - name: Extract .deb packages
+        run: |
+          docker create --name extract hyprland-debs /bin/true
+          mkdir -p pool/main
+          docker cp extract:/out/. ./pool/main/
+          docker rm extract
+
+          echo "📦 Extracted packages:"
+          ls -1 pool/main/
+
+          # Sort into subfolders by first letter
+          for f in pool/main/*.deb; do
+            [ -f "$f" ] || continue
+            pkg=$(basename "$f")
+            first=$(echo "$pkg" | cut -c1 | tr '[:upper:]' '[:lower:]')
+            mkdir -p "pool/main/$first"
+            mv "$f" "pool/main/$first/"
+          done
+
+          echo "✅ Sorted pool structure:"
+          tree pool/main || ls -R pool/main
+
+      - name: Generate APT repository metadata
+        run: |
+          mkdir -p dists/trixie/main/binary-amd64
+          apt-ftparchive packages pool/ > dists/trixie/main/binary-amd64/Packages
+          gzip -9c dists/trixie/main/binary-amd64/Packages > dists/trixie/main/binary-amd64/Packages.gz
+          apt-ftparchive release dists/trixie > dists/trixie/Release
+
+      - name: Import GPG key
+        run: |
+          echo "${{ secrets.DEB_GPG_PRIVATE_KEY }}" > private.key
+          gpg --batch --yes --pinentry-mode loopback --import private.key
+          gpg --list-secret-keys
+
+      - name: Sign Release file
+        run: |
+          gpg --batch --yes --pinentry-mode loopback \
+              --default-key "${{ secrets.DEB_GPG_KEY_ID }}" \
+              -abs -o dists/trixie/Release.gpg \
+              dists/trixie/Release
+
+      - name: Securely delete private key
+        run: shred -u private.key
+
+      - name: Prepare public repository folder
+        run: |
+          mkdir -p public_repo
+          cp -r dists pool public.gpg public_repo/
+          echo "Repository prepared:"
+          tree public_repo || ls -R public_repo
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public_repo
+          publish_branch: gh-pages
+
+      - name: Print APT repo URL
+        run: |
+          echo "✅ Repository deployed successfully!"
+          echo "📦 Add it with:"
+          echo "curl -fsSL https://martindahlswe.github.io/hyprland-debian/public.gpg | sudo tee /usr/share/keyrings/hyprland-archive-keyring.gpg > /dev/null"
+          echo "echo 'deb [signed-by=/usr/share/keyrings/hyprland-archive-keyring.gpg] https://martindahlswe.github.io/hyprland-debian trixie main' | sudo tee /etc/apt/sources.list.d/hyprland.list"
+          echo "sudo apt update && sudo apt install hyprland"
+
