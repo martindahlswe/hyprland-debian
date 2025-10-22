@@ -1,0 +1,354 @@
+Package: aquamarine
+Architecture: amd64
+Version: 0.9.5
+Priority: optional
+Section: libs
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libc6 (>= 2.34), libstdc++6 (>= 12), libhyprutils6 (>= 0.10.0), hyprwayland-scanner (>= 0.4.5)
+Filename: pool/main/a/aquamarine_0.9.5_amd64.deb
+Size: 366140
+MD5sum: 9e25c50b3ec3da7a39b4075fec629d37
+SHA1: 823d6e53e99d86b420da04378b09c708b3823451
+SHA256: 8029457de31a36f2595d4371bcbe6ab19748dca119fbb6bcb7d5658e69689682
+SHA512: 5a4b1b66fbf3a4f50c49f1cfda6a49b9758a58ff9be49bda77363b8ee1be383a0389cf2d8f613a9b6ae5a893ac9272cb83301dbdb98feaee528336d98788af10
+Homepage: https://github.com/hyprwm/aquamarine
+Description: Aquamarine - rendering and composition backend for Hyprland
+ Aquamarine provides EGL/DRM abstractions and rendering utilities
+ used internally by the Hyprland compositor for managing graphics and buffers.
+
+Package: hyprcursor-util
+Architecture: amd64
+Version: 0.1.13
+Priority: optional
+Section: utils
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libhyprcursor0 (= 0.1.13)
+Filename: pool/main/h/hyprcursor-util_0.1.13_amd64.deb
+Size: 105000
+MD5sum: ae8b25379fe1c4bb2da9b8fcf5a77a62
+SHA1: 917413ba97c4da39ec6748ec517ff8dd5992143b
+SHA256: d00db1bd2b1ab9b1464f295ed680470a5a824518eeb07360361ea45bb58a9b79
+SHA512: f216e68772380f76aa9d94508f19d09c098eccef4df411662b9c01b1421494930e4d0982df2db3286ffd1c856e37fb1a792cb003034fae1b6a21b34d3522e5f7
+Homepage: https://github.com/hyprwm/hyprcursor
+Description: Utility to manipulate hyprcursor and xcursor themes
+ hyprcursor is the cursor format, and associated files and utilities
+ for Hyprland.
+ .
+ This package contains hyprcursor-util, a CLI tool to compile, pack,
+ and unpack Hyprcursor and Xcursor themes.
+
+Package: hyprcursor
+Architecture: all
+Version: 0.1.13
+Priority: optional
+Section: misc
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libhyprcursor0 (= 0.1.13)
+Filename: pool/main/h/hyprcursor_0.1.13_all.deb
+Size: 796
+MD5sum: aace88475f8a91b3f70af8f80fcb507b
+SHA1: fd90e067a75f49ac66c85309b5aae78daa5e1645
+SHA256: 63a7542e139f4100608924c1cfa808bdd587108c15159aa21d111f2a42aefc20
+SHA512: 6820cd83bcfbabb9d8bfc57ddb4edb146727544ddcd72056accec6c88eded40a40b570c140a1d5b664f5a30b325e501e422376e0a4c2aaecb97cae652cbbd8e1
+Homepage: https://github.com/hyprwm/hyprcursor
+Description: Meta package for Hyprcursor runtime
+ This meta package satisfies dependencies on 'hyprcursor' by providing libhyprcursor0.
+
+Package: hyprgraphics
+Architecture: amd64
+Version: 0.2.0
+Multi-Arch: same
+Priority: optional
+Section: libs
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libc6 (>= 2.34), libstdc++6 (>= 12), libdrm2 (>= 2.4.120), libgbm1 (>= 23.0), libegl1, libgl1, libhyprutils6 (>= 0.10.0), libhyprlang2 (>= 0.6.4), hyprland-protocols (>= 0.7.0), libmagic1 (>= 5.45)
+Filename: pool/main/h/hyprgraphics_0.2.0_amd64.deb
+Size: 77192
+MD5sum: 6d3a3d6e107c89e29c702245d62d5263
+SHA1: bd569a80927dd97b7060e0c485f6eb4886e63a8e
+SHA256: 3bacbadae93634c61fc3239fc2da64b946ae290db12196d263768be689f520e8
+SHA512: bdf48737bb9f41c5ad28653c7266553da67c2f94508d4e68c13c18ce3ad3ab6136c0b8914bdb7165e7e6e9c647611920bb05520b45273dab9da8e8ceceb411b3
+Homepage: https://github.com/hyprwm/hyprgraphics
+Description: GPU abstraction and rendering utilities for Hyprland
+ hyprgraphics provides GPU device abstraction and rendering helpers
+ used by Hyprland and related tools to manage framebuffers, shaders,
+ and GPU memory in a backend-agnostic way.
+ .
+ This package installs the runtime shared library for hyprgraphics.
+
+Package: hypridle
+Architecture: amd64
+Version: 0.1.7
+Priority: optional
+Section: utils
+Maintainer: Hyprland Build <builder@example.com>
+Depends: hyprutils (>= 0.10.0), hyprlang (>= 0.6.4), libsdbus-c++2, libwayland-client0, libxkbcommon0, libinput10
+Filename: pool/main/h/hypridle_0.1.7_amd64.deb
+Size: 116320
+MD5sum: 810c3264638a6c50142528517ae583a5
+SHA1: c4c144603485212aab9b955620bfa6b9c55c6a31
+SHA256: 6080b34a744f4f6ba9ee23b6713074cb9eb4c13a9ab837cf6c87fcbd3cacd67f
+SHA512: f5f8cd429ba71d26ef8344b276d0bba292b351b8b0f82f8d579d5478f7f29290019e29d5f7e32f8e6e23968ea85bb4efd732009df8828c7541de0df556ef5dfe
+Description: Hypridle - idle management daemon for Hyprland (triggers Hyprlock etc.)
+
+Package: hyprland-protocols
+Architecture: all
+Version: 0.7.0
+Multi-Arch: foreign
+Priority: optional
+Section: x11
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: wayland-protocols (>= 1.31)
+Filename: pool/main/h/hyprland-protocols_0.7.0_all.deb
+Size: 8996
+MD5sum: 97507aa19b7b1222f5bc69efe160296e
+SHA1: adabcf16702c8504e657a2d824eacc1c85e70d93
+SHA256: 7eedb80eff6b0640b57d3bfe001bea50a4387820771fb14f270f50842a0b1c66
+SHA512: 373cce881a9d7ad8956fbeade667f516a90ffb33434de115a2b9dff56cdeecfafc4761769d4446fcc49815e48a08fe75247bc9404a815536c351a08ba18d878f
+Homepage: https://github.com/hyprwm/hyprland-protocols
+Description: Hyprland-specific Wayland protocol definitions
+ Hyprland-protocols provides additional Wayland XML protocol files
+ used by the Hyprland compositor and its related utilities.
+ These protocols extend standard Wayland interfaces with Hyprland-specific
+ functionality such as decorations, animations, and workspace handling.
+
+Package: hyprland-qtutils
+Architecture: amd64
+Version: 0.1.5
+Priority: optional
+Section: libs
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libhyprutils6 (>= 0.10.0), libhyprlang2 (>= 0.6.4), qt6-base-dev, qt6-declarative-dev, qt6-wayland-dev, libqt6core6, libqt6gui6, libqt6widgets6, libqt6quick6, libqt6waylandclient6
+Filename: pool/main/h/hyprland-qtutils_0.1.5_amd64.deb
+Size: 106072
+MD5sum: c44c8bb76b7222c46a0dddeab7b7acaa
+SHA1: 4908a90b6f3c2319352e1eb8f6023461da6426fd
+SHA256: 733d354bf2bc68d176f8b5a63731e056b2eaa511a3c5b6be15f69ab072dbaf36
+SHA512: 5191a098430c574e11ad3f7885b02c184888f88a98a2648b52070727842497ebd156e224246e280af0ec695640ac3a957aac2584bde7bb017e6c30b48e48f30d
+Homepage: https://github.com/hyprwm/hyprland-qtutils
+Description: Qt6 utilities for Hyprland tools
+ Provides helper components and abstractions used by Hyprland Qt-based tools.
+
+Package: hyprland
+Architecture: amd64
+Version: 0.49.0
+Priority: optional
+Section: x11
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libhyprcursor0 (>= 0.1.13), libhyprlang2 (>= 0.6.4), libhyprutils6 (>= 0.10.0), aquamarine (>= 0.9.5), hyprwayland-scanner (>= 0.4.5), hyprgraphics (>= 0.2.0), hyprland-protocols (>= 0.7.0), libxcb-icccm4, libxcb-composite0, libxcb-res0, libxcb-errors-dev, libxkbcommon0, libxcursor1, libinput10, libre2-11, libgles2-mesa-dev, libopengl0, libseat1, libdisplay-info2, libdrm2, libpixman-1-0, libwayland-client0, libwayland-server0, libc6 (>= 2.34), libstdc++6 (>= 12)
+Filename: pool/main/h/hyprland_0.49.0_amd64.deb
+Size: 49558180
+MD5sum: 824ab02463964098a31146227372e040
+SHA1: 44c03d3908716112a25d4fe49d17b6b1109b1c6f
+SHA256: a7f3595ec4f32133305fc5d1920be5b43a2b628dc3a48813b423c1d7ec93ccf6
+SHA512: bf4662df0978b5b3973603820ea5bf86dc58ca8673b4e0b0a79f84f586830d535d0a14ee4fee24a8829f56385d13d3cc9686023c2f44b3b662f634a2b5c340ff
+Homepage: https://github.com/hyprwm/Hyprland
+Description: Hyprland - dynamic tiling Wayland compositor
+
+Package: hyprlang
+Architecture: amd64
+Version: 0.6.4
+Priority: optional
+Section: misc
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libhyprlang2 (= 0.6.4)
+Filename: pool/main/h/hyprlang_0.6.4_amd64.deb
+Size: 832
+MD5sum: 0254985ed380bb92fa3e730f39ea3eb5
+SHA1: 8ade1874f2012f6b5de6412531ad124a465e9aca
+SHA256: a3c6500db8bce51ab980ed11b8ee31ed02eff9219688aefbdd09c2917c1b431e
+SHA512: 0aaa3b36ed3079ed04c5aa0bf040b8d945eff16f080fe4fe39a75b00aa0f59c58a4a69a4820ec8e06abed618dbcea33a31d6d7d732635113cbd800f82b840dc4
+Homepage: https://github.com/hyprwm/hyprlang
+Description: Fast and user-friendly configuration language (metapackage)
+ The hypr configuration language for Linux applications.
+ This metapackage pulls in the runtime shared library.
+
+Package: hyprlock
+Architecture: amd64
+Version: 0.5.0
+Priority: optional
+Section: utils
+Maintainer: Hyprland Build <builder@example.com>
+Depends: hyprutils (>= 0.10.0), hyprlang (>= 0.6.4), libhyprcursor0 (>= 0.1.13), hyprgraphics (>= 0.2.0), hyprland-protocols (>= 0.7.0), libpam0g, libxkbcommon0, libinput10, libwayland-client0, libsdbus-c++2
+Filename: pool/main/h/hyprlock_0.5.0_amd64.deb
+Size: 238404
+MD5sum: ef55c98651c6157a1a5e097969bbd016
+SHA1: 9cb3824cf55ad3acb064b8a5be20973100a6b9a9
+SHA256: e2fd74e17606fffca468cb21aa4692fe8edd8e971821d36f2876d73b5d3274d9
+SHA512: c0be3a6f21fc2f144fc0ea706bb93a1f6f72a10aed2ca19f2b81cb13df7bad7edc19db58a1eb539b7a89f26790f863cba2e289f1ae991738d1268751408bfeb0
+Description: Hyprlock - modern lock screen utility for Hyprland
+
+Package: hyprpaper
+Architecture: amd64
+Version: 0.7.6
+Priority: optional
+Section: utils
+Maintainer: Hyprland Build <builder@example.com>
+Depends: hyprutils (>= 0.10.0), hyprlang (>= 0.6.4), libhyprcursor0 (>= 0.1.13), hyprgraphics (>= 0.2.0), hyprland-protocols (>= 0.7.0)
+Filename: pool/main/h/hyprpaper_0.7.6_amd64.deb
+Size: 140620
+MD5sum: ccb93011ffc5ca67daba07e708db4e5c
+SHA1: 6334bec7bcd0f7dec933b32a05352da6b643d394
+SHA256: e0178123fb37f3f439732f36f7ba7841d9dacbf150f8270d25b3992fb2f3e388
+SHA512: f6a47ac023d6b31b6c74d871c5557480124a48d86616fc70b82bc3d8904da434b5916e8732498062ddad624188bc4f4d82291e9e3c2ab059de3cfbcd8e54051a
+Description: Hyprpaper - wallpaper daemon for Hyprland
+
+Package: hyprutils
+Architecture: all
+Version: 0.10.0
+Priority: optional
+Section: misc
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libhyprutils6 (= 0.10.0)
+Filename: pool/main/h/hyprutils_0.10.0_all.deb
+Size: 840
+MD5sum: e98a9f0f7b30409422fdd4fb3599a291
+SHA1: 1ef10635d98e8eaded473628ef61d8855b811320
+SHA256: eb7c99b6f616d6c9b391f5c1d0066181ba57ec2ef734229d14cec114c7b3b12a
+SHA512: 659ccc089aceda0c37255b5a895db06bddeb985ced7c9eb83fd9d8a91106fad3e6bbf70c1aa818d4c420dee61bc214c3f3067286cf18ee166ee869223e944998
+Homepage: https://github.com/hyprwm/hyprutils
+Description: Utilities used across the Hyprland ecosystem (metapackage)
+ Hyprutils is a small C++ library for utilities used across the Hyprland
+ window manager ecosystem. This metapackage pulls in the runtime library.
+
+Package: hyprwayland-scanner
+Architecture: amd64
+Version: 0.4.5
+Multi-Arch: foreign
+Priority: optional
+Section: libdevel
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libc6 (>= 2.34), libstdc++6 (>= 12), libpugixml1v5 (>= 1.4)
+Filename: pool/main/h/hyprwayland-scanner_0.4.5_amd64.deb
+Size: 74904
+MD5sum: 620a0c87dbc125c6a6ed18499266cf69
+SHA1: db955c9e84d4f92a1c34e855fa06877e2e504a0c
+SHA256: dbc6ee22db6a541821cb4254994120ed3a0108ab22d70409ac716c438acbcd42
+SHA512: bf441a4d22f2834ba1ec9fc22621755598d492fe85bf3173e3b46ad4a668540acc57ed5a9ed8f7ed9666d7b3f638e25c5a08883352f053990bbe82a1aad9f7d8
+Homepage: https://github.com/hyprwm/hyprwayland-scanner
+Description: Implementation of wayland-scanner for Hyprland
+ hyprwayland-scanner is a Hyprland implementation of wayland-scanner,
+ in and for C++.
+
+Package: libhyprcursor-dev
+Architecture: amd64
+Version: 0.1.13
+Multi-Arch: same
+Priority: optional
+Section: libdevel
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libhyprcursor0 (= 0.1.13)
+Filename: pool/main/l/libhyprcursor-dev_0.1.13_amd64.deb
+Size: 3600
+MD5sum: cad90c955a5d7361793e24d5a0e182a2
+SHA1: 8fd1cb88b93c426fbaf244851449f0a1e4c008f7
+SHA256: 926812532fcdf83b0ee928954c01de5afece6eb85b38b29f60f44baf0ea74f65
+SHA512: 40dc39f60d16709ebf9a450478d14018e75d1f1df14f627c99e56ad3c897c250cf4278c274437f8df429ee59b38ad15450b6098955a47207f85770845751643d
+Homepage: https://github.com/hyprwm/hyprcursor
+Description: Hyprland cursor format, library and utilities (development headers)
+ hyprcursor is the cursor format, and associated files and utilities
+ for Hyprland.
+ .
+ This package contains header files and build metadata for hyprcursor.
+
+Package: libhyprcursor0
+Architecture: amd64
+Version: 0.1.13
+Multi-Arch: same
+Priority: optional
+Section: libs
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libc6 (>= 2.34), libstdc++6 (>= 12), libcairo2 (>= 1.16), librsvg2-2 (>= 2.50), libzip-dev (>= 1.7), libtomlplusplus3 (>= 3.0.0), libhyprlang2 (>= 0.6.4)
+Filename: pool/main/l/libhyprcursor0_0.1.13_amd64.deb
+Size: 133348
+MD5sum: e206871bb9cf10949c90e91c63559a13
+SHA1: ae1887572a6518bbb3243b0d38f07e21b57b492a
+SHA256: 5bc84bc09ca3a5d36143c09b4b79359c630c86dfef3286619ad9b3271983927f
+SHA512: 7559a0be4537a3b6fab6fe21fc3f541a60034f4e900a7cf3c6854b0f881e9241a941b388033f5961deb1ba7170c90f6be4c789e0e2f00957eceaa5d724cb9dd5
+Homepage: https://github.com/hyprwm/hyprcursor
+Description: Hyprland cursor format, library and utilities (shared library)
+ hyprcursor is the cursor format, and associated files and utilities
+ for Hyprland.
+ .
+ This package contains the shared object library for hyprcursor.
+
+Package: libhyprlang-dev
+Architecture: amd64
+Version: 0.6.4
+Multi-Arch: same
+Priority: optional
+Section: libdevel
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libhyprlang2 (= 0.6.4), libhyprutils-dev (>= 0.10.0)
+Filename: pool/main/l/libhyprlang-dev_0.6.4_amd64.deb
+Size: 4976
+MD5sum: e363821fcf5307d50cbb53273524104c
+SHA1: a89501373723a9a095e6dba4254e1360b93e1819
+SHA256: 140fdc325f310f47ebef4c74aeab42b0f74f10a5124e5fc5d62bc11e2fe934b3
+SHA512: c45f9bf3bea4d0c3da7e866b354c77eb052d79d7383806a508c8685688d43730c4b96251f53ba965ea52ba28098d9fb8c4d2a42d186b3c53a9f1b57f537e4e4f
+Homepage: https://github.com/hyprwm/hyprlang
+Description: Fast and user-friendly configuration language (development files)
+ The hypr configuration language is an extremely efficient, yet easy to
+ work with, configuration language for Linux applications.
+ .
+ This package contains the development headers and CMake files.
+
+Package: libhyprlang2
+Architecture: amd64
+Version: 0.6.4
+Multi-Arch: same
+Priority: optional
+Section: libs
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libc6 (>= 2.34), libstdc++6 (>= 12)
+Filename: pool/main/l/libhyprlang2_0.6.4_amd64.deb
+Size: 88468
+MD5sum: 779ffb0b3e118f9e5ce40b3ea241c9b5
+SHA1: 4632df506a3a111e2a09629b95b1d8680b400439
+SHA256: 074e3dc7039a6f6f6728e2261e5131c623327a7b3574319dd1002c106a984a08
+SHA512: f27899e7cdeffa7509a3b24d53b438ba3fb0b2c112a370d08fc6b4902a1cd5d14174c23c3e030bac202d4a24b430d45abfcb725772714d6a15a6ec5989175355
+Homepage: https://github.com/hyprwm/hyprlang
+Description: Fast and user-friendly configuration language (library files)
+ The hypr configuration language is an extremely efficient, yet easy to
+ work with, configuration language for Linux applications.
+ .
+ It's user-friendly, easy to grasp, and easy to implement.
+
+Package: libhyprutils-dev
+Architecture: amd64
+Version: 0.10.0
+Multi-Arch: same
+Priority: optional
+Section: libdevel
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libhyprutils6 (= 0.10.0)
+Filename: pool/main/l/libhyprutils-dev_0.10.0_amd64.deb
+Size: 15244
+MD5sum: aaffc66c1eab3ed92464ae0369371fde
+SHA1: 906b3173a56dc58b44205bb819a29443dc344bbb
+SHA256: 31920f9f77d481ac090a235346ba4dc5000022ded098e255914cce6322ac0a19
+SHA512: 04eaddea8f5acdacbbddc6773ef19aeb15fb7a9076d902eb79c003de632adacc7feafc117d2ef4d5590c111e7c4788afc555d167320a50fc944f7e87e92239d3
+Homepage: https://github.com/hyprwm/hyprutils
+Description: Utilities used across the Hyprland ecosystem (development files)
+ Hyprutils is a small C++ library for utilities used across the Hyprland
+ window manager ecosystem.
+
+Package: libhyprutils6
+Architecture: amd64
+Version: 0.10.0
+Multi-Arch: same
+Priority: optional
+Section: libs
+Maintainer: Martin Dahl <martindahl16@icloud.com>
+Depends: libc6 (>= 2.34), libstdc++6 (>= 12), libpixman-1-0 (>= 0.42)
+Filename: pool/main/l/libhyprutils6_0.10.0_amd64.deb
+Size: 94388
+MD5sum: aeeeac670a5c21296d4d839e38cd3e9b
+SHA1: 60c8ccf6d28e8de0e68f6a38803ebc6648dbd145
+SHA256: c343f50fdc8cad455bdf0e376ba3f51fd39974c575babac54e11116be30605ca
+SHA512: 2a004d77a31c4b315da89c0e0ca76ae6a69843c7c62776e9aa5ba744615b7eda5294734c4171e629bfdc9c68169eef5448504b26aeea9a67133f8184ec7809d4
+Homepage: https://github.com/hyprwm/hyprutils
+Description: Utilities used across the Hyprland ecosystem (library)
+ Hyprutils is a small C++ library for utilities used across the Hyprland
+ window manager ecosystem.
+
