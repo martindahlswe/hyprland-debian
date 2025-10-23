@@ -19,6 +19,11 @@ jobs:
       image: debian:trixie-slim
       options: --privileged
 
+    # 👇 ensure all `run:` steps use bash (not dash)
+    defaults:
+      run:
+        shell: bash
+
     steps:
       # ---------------------------------------------------------
       # 🧱 Setup environment
@@ -27,7 +32,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y \
-            git curl gnupg lsb-release ca-certificates \
+            bash git curl gnupg lsb-release ca-certificates \
             apt-utils apt-transport-https \
             podman dpkg-dev fakeroot gzip tree
 
@@ -43,7 +48,7 @@ jobs:
       - name: Build modular Hyprland components
         run: |
           set -eux
-          mkdir -p ${OUT_DIR}
+          mkdir -p "${OUT_DIR}"
           echo "🔨 Building base image..."
           podman build -f components/base.Dockerfile -t hyprland-base .
 
@@ -65,15 +70,15 @@ jobs:
 
           for c in "${COMPONENTS[@]}"; do
             echo "🔧 Building $c ..."
-            podman build -f components/${c}.Dockerfile -t ${c} .
-            mkdir -p ${OUT_DIR}/${c}
-            id=$(podman create ${c})
+            podman build -f "components/${c}.Dockerfile" -t "${c}" .
+            mkdir -p "${OUT_DIR}/${c}"
+            id=$(podman create "${c}")
             podman cp "${id}:/out/." "${OUT_DIR}/${c}/"
             podman rm "${id}"
           done
 
           echo "✅ Finished building all components"
-          tree ${OUT_DIR} || ls -R ${OUT_DIR}
+          tree "${OUT_DIR}" || ls -R "${OUT_DIR}"
 
       # ---------------------------------------------------------
       # 🗂️ Sort and prepare pool structure
@@ -81,7 +86,7 @@ jobs:
       - name: Organize .deb packages into pool/
         run: |
           mkdir -p pool/main
-          find ${OUT_DIR} -name '*.deb' -exec cp {} pool/main/ \;
+          find "${OUT_DIR}" -name '*.deb' -exec cp {} pool/main/ \;
 
           # Sort into subfolders by first letter (for Debian conventions)
           for f in pool/main/*.deb; do
@@ -115,10 +120,10 @@ jobs:
 
       - name: Generate APT repository metadata
         run: |
-          mkdir -p dists/${DEBIAN_CODENAME}/main/binary-amd64
-          apt-ftparchive packages pool/ > dists/${DEBIAN_CODENAME}/main/binary-amd64/Packages
-          gzip -9c dists/${DEBIAN_CODENAME}/main/binary-amd64/Packages > dists/${DEBIAN_CODENAME}/main/binary-amd64/Packages.gz
-          apt-ftparchive -c=config/release.conf release dists/${DEBIAN_CODENAME} > dists/${DEBIAN_CODENAME}/Release
+          mkdir -p "dists/${DEBIAN_CODENAME}/main/binary-amd64"
+          apt-ftparchive packages pool/ > "dists/${DEBIAN_CODENAME}/main/binary-amd64/Packages"
+          gzip -9c "dists/${DEBIAN_CODENAME}/main/binary-amd64/Packages" > "dists/${DEBIAN_CODENAME}/main/binary-amd64/Packages.gz"
+          apt-ftparchive -c=config/release.conf release "dists/${DEBIAN_CODENAME}" > "dists/${DEBIAN_CODENAME}/Release"
 
       # ---------------------------------------------------------
       # 🔐 GPG signing
@@ -132,13 +137,13 @@ jobs:
         run: |
           gpg --batch --yes --pinentry-mode loopback \
               --default-key "${{ secrets.DEB_GPG_KEY_ID }}" \
-              -abs -o dists/${DEBIAN_CODENAME}/Release.gpg \
-              dists/${DEBIAN_CODENAME}/Release
+              -abs -o "dists/${DEBIAN_CODENAME}/Release.gpg" \
+              "dists/${DEBIAN_CODENAME}/Release"
 
           gpg --batch --yes --pinentry-mode loopback \
               --default-key "${{ secrets.DEB_GPG_KEY_ID }}" \
-              --clearsign -o dists/${DEBIAN_CODENAME}/InRelease \
-              dists/${DEBIAN_CODENAME}/Release
+              --clearsign -o "dists/${DEBIAN_CODENAME}/InRelease" \
+              "dists/${DEBIAN_CODENAME}/Release"
 
       - name: Securely delete private key
         run: shred -u private.key
