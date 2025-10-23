@@ -38,7 +38,7 @@ jobs:
           docker rm extract
 
           echo "📦 Extracted packages:"
-          ls -1 pool/main/
+          ls -1 pool/main/ || true
 
           # Sort into subfolders by first letter
           for f in pool/main/*.deb; do
@@ -55,7 +55,7 @@ jobs:
       - name: Generate apt-ftparchive config
         run: |
           mkdir -p config
-          cat > config/release.conf <<'EOF'
+          cat <<'EOF' > config/release.conf
 APT::FTPArchive::Release {
   Origin "Hyprland Debian Repo";
   Label "Hyprland Debian Repo";
@@ -72,14 +72,13 @@ EOF
           mkdir -p dists/trixie/main/binary-amd64
           apt-ftparchive packages pool/ > dists/trixie/main/binary-amd64/Packages
           gzip -9c dists/trixie/main/binary-amd64/Packages > dists/trixie/main/binary-amd64/Packages.gz
-          apt-ftparchive release dists/trixie > dists/trixie/Release
+          apt-ftparchive -c=config/release.conf release dists/trixie > dists/trixie/Release
 
       - name: Import GPG key
         run: |
           echo "${{ secrets.DEB_GPG_PRIVATE_KEY }}" > private.key
           gpg --batch --yes --pinentry-mode loopback --import private.key
           gpg --list-secret-keys
-
 
       - name: Sign Release file (generate both Release.gpg and InRelease)
         run: |
@@ -88,7 +87,7 @@ EOF
               --default-key "${{ secrets.DEB_GPG_KEY_ID }}" \
               -abs -o dists/trixie/Release.gpg \
               dists/trixie/Release
-      
+
           # Clear-signed file (InRelease)
           gpg --batch --yes --pinentry-mode loopback \
               --default-key "${{ secrets.DEB_GPG_KEY_ID }}" \
@@ -119,4 +118,3 @@ EOF
           echo "curl -fsSL https://martindahlswe.github.io/hyprland-debian/public.gpg | sudo tee /usr/share/keyrings/hyprland-archive-keyring.gpg > /dev/null"
           echo "echo 'deb [signed-by=/usr/share/keyrings/hyprland-archive-keyring.gpg] https://martindahlswe.github.io/hyprland-debian trixie main' | sudo tee /etc/apt/sources.list.d/hyprland.list"
           echo "sudo apt update && sudo apt install hyprland"
-
