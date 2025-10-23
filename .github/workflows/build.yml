@@ -52,6 +52,21 @@ jobs:
           echo "✅ Sorted pool structure:"
           tree pool/main || ls -R pool/main
 
+      - name: Generate apt-ftparchive config
+        run: |
+          mkdir -p config
+          cat > config/release.conf <<EOF
+             APT::FTPArchive::Release {
+               Origin "Hyprland Debian Repo";
+               Label "Hyprland Debian Repo";
+               Suite "trixie";
+               Codename "trixie";
+               Architectures "amd64";
+               Components "main";
+               Description "Unofficial Hyprland Debian Repository";
+         };
+         EOF
+
       - name: Generate APT repository metadata
         run: |
           mkdir -p dists/trixie/main/binary-amd64
