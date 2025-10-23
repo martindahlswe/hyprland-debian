@@ -1,4 +1,4 @@
-name: Build and Publish Hyprland Debs (Debian 13)
+name: Build and Publish Hyprland Debian Repository (Modular)
 
 on:
   push:
@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+env:
+  DEBIAN_CODENAME: trixie
+  OUT_DIR: out
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,31 +20,70 @@ jobs:
       options: --privileged
 
     steps:
-      - name: Install required build tools
+      # ---------------------------------------------------------
+      # 🧱 Setup environment
+      # ---------------------------------------------------------
+      - name: Install build essentials and container tooling
         run: |
           apt-get update
           apt-get install -y \
             git curl gnupg lsb-release ca-certificates \
             apt-utils apt-transport-https \
-            docker.io dpkg-dev fakeroot gzip
+            podman dpkg-dev fakeroot gzip tree
 
-      - name: Checkout repo
+      # ---------------------------------------------------------
+      # 📦 Checkout source
+      # ---------------------------------------------------------
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: docker build -t hyprland-debs .
-
-      - name: Extract .deb packages
+      # ---------------------------------------------------------
+      # 🏗️ Build all modular components
+      # ---------------------------------------------------------
+      - name: Build modular Hyprland components
         run: |
-          docker create --name extract hyprland-debs /bin/true
+          set -eux
+          mkdir -p ${OUT_DIR}
+          echo "🔨 Building base image..."
+          podman build -f components/base.Dockerfile -t hyprland-base .
+
+          COMPONENTS=(
+            hyprwayland-scanner
+            hyprutils
+            aquamarine
+            hyprlang
+            hyprcursor
+            hyprland-protocols
+            hyprgraphics
+            hyprland
+            hyprland-qtutils
+            hyprpaper
+            hyprlock
+            hypridle
+            hyprsunset
+          )
+
+          for c in "${COMPONENTS[@]}"; do
+            echo "🔧 Building $c ..."
+            podman build -f components/${c}.Dockerfile -t ${c} .
+            mkdir -p ${OUT_DIR}/${c}
+            id=$(podman create ${c})
+            podman cp "${id}:/out/." "${OUT_DIR}/${c}/"
+            podman rm "${id}"
+          done
+
+          echo "✅ Finished building all components"
+          tree ${OUT_DIR} || ls -R ${OUT_DIR}
+
+      # ---------------------------------------------------------
+      # 🗂️ Sort and prepare pool structure
+      # ---------------------------------------------------------
+      - name: Organize .deb packages into pool/
+        run: |
           mkdir -p pool/main
-          docker cp extract:/out/. ./pool/main/
-          docker rm extract
+          find ${OUT_DIR} -name '*.deb' -exec cp {} pool/main/ \;
 
-          echo "📦 Extracted packages:"
-          ls -1 pool/main/ || true
-
-          # Sort into subfolders by first letter
+          # Sort into subfolders by first letter (for Debian conventions)
           for f in pool/main/*.deb; do
             [ -f "$f" ] || continue
             pkg=$(basename "$f")
@@ -49,72 +92,82 @@ jobs:
             mv "$f" "pool/main/$first/"
           done
 
-          echo "✅ Sorted pool structure:"
+          echo "✅ Pool structure:"
           tree pool/main || ls -R pool/main
 
+      # ---------------------------------------------------------
+      # 🧾 Generate APT metadata
+      # ---------------------------------------------------------
       - name: Generate apt-ftparchive config
         run: |
           mkdir -p config
-          printf '%s\n' \
-            'APT::FTPArchive::Release {' \
-            '  Origin "Hyprland Debian Repo";' \
-            '  Label "Hyprland Debian Repo";' \
-            '  Suite "trixie";' \
-            '  Codename "trixie";' \
-            '  Architectures "amd64";' \
-            '  Components "main";' \
-            '  Description "Unofficial Hyprland Debian Repository";' \
-            '};' \
-            > config/release.conf
+          cat > config/release.conf <<EOF
+          APT::FTPArchive::Release {
+            Origin "Hyprland Debian Repo";
+            Label "Hyprland Debian Repo";
+            Suite "${DEBIAN_CODENAME}";
+            Codename "${DEBIAN_CODENAME}";
+            Architectures "amd64";
+            Components "main";
+            Description "Unofficial Hyprland Debian Repository";
+          };
+          EOF
 
       - name: Generate APT repository metadata
         run: |
-          mkdir -p dists/trixie/main/binary-amd64
-          apt-ftparchive packages pool/ > dists/trixie/main/binary-amd64/Packages
-          gzip -9c dists/trixie/main/binary-amd64/Packages > dists/trixie/main/binary-amd64/Packages.gz
-          apt-ftparchive -c=config/release.conf release dists/trixie > dists/trixie/Release
+          mkdir -p dists/${DEBIAN_CODENAME}/main/binary-amd64
+          apt-ftparchive packages pool/ > dists/${DEBIAN_CODENAME}/main/binary-amd64/Packages
+          gzip -9c dists/${DEBIAN_CODENAME}/main/binary-amd64/Packages > dists/${DEBIAN_CODENAME}/main/binary-amd64/Packages.gz
+          apt-ftparchive -c=config/release.conf release dists/${DEBIAN_CODENAME} > dists/${DEBIAN_CODENAME}/Release
 
+      # ---------------------------------------------------------
+      # 🔐 GPG signing
+      # ---------------------------------------------------------
       - name: Import GPG key
         run: |
           echo "${{ secrets.DEB_GPG_PRIVATE_KEY }}" > private.key
           gpg --batch --yes --pinentry-mode loopback --import private.key
-          gpg --list-secret-keys
 
-      - name: Sign Release file (generate both Release.gpg and InRelease)
+      - name: Sign Release files
         run: |
-          # Detached signature (.gpg)
           gpg --batch --yes --pinentry-mode loopback \
               --default-key "${{ secrets.DEB_GPG_KEY_ID }}" \
-              -abs -o dists/trixie/Release.gpg \
-              dists/trixie/Release
+              -abs -o dists/${DEBIAN_CODENAME}/Release.gpg \
+              dists/${DEBIAN_CODENAME}/Release
 
-          # Clear-signed file (InRelease)
           gpg --batch --yes --pinentry-mode loopback \
               --default-key "${{ secrets.DEB_GPG_KEY_ID }}" \
-              --clearsign -o dists/trixie/InRelease \
-              dists/trixie/Release
+              --clearsign -o dists/${DEBIAN_CODENAME}/InRelease \
+              dists/${DEBIAN_CODENAME}/Release
 
       - name: Securely delete private key
         run: shred -u private.key
 
-      - name: Prepare public repository folder
+      # ---------------------------------------------------------
+      # 🌐 Publish to GitHub Pages
+      # ---------------------------------------------------------
+      - name: Prepare publication folder
         run: |
           mkdir -p public_repo
           cp -r dists pool public.gpg public_repo/
-          echo "Repository prepared:"
+          echo "Repository contents:"
           tree public_repo || ls -R public_repo
 
-      - name: Publish to GitHub Pages
+      - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public_repo
           publish_branch: gh-pages
 
+      # ---------------------------------------------------------
+      # ✅ Print summary
+      # ---------------------------------------------------------
       - name: Print APT repo URL
         run: |
           echo "✅ Repository deployed successfully!"
-          echo "📦 Add it with:"
+          echo "Add with:"
           echo "curl -fsSL https://martindahlswe.github.io/hyprland-debian/public.gpg | sudo tee /usr/share/keyrings/hyprland-archive-keyring.gpg > /dev/null"
-          echo "echo 'deb [signed-by=/usr/share/keyrings/hyprland-archive-keyring.gpg] https://martindahlswe.github.io/hyprland-debian trixie main' | sudo tee /etc/apt/sources.list.d/hyprland.list"
+          echo "echo 'deb [signed-by=/usr/share/keyrings/hyprland-archive-keyring.gpg] https://martindahlswe.github.io/hyprland-debian ${DEBIAN_CODENAME} main' | sudo tee /etc/apt/sources.list.d/hyprland.list"
           echo "sudo apt update && sudo apt install hyprland"
+
