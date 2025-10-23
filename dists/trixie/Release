@@ -1,17 +1,24 @@
-Date: Thu, 23 Oct 2025 08:29:40 +0000
+Architectures: amd64
+Codename: trixie
+Components: main
+Date: Thu, 23 Oct 2025 08:55:28 +0000
+Description: Unofficial Hyprland Debian Repository
+Label: Hyprland Debian Repo
+Origin: Hyprland Debian Repo
+Suite: trixie
 MD5Sum:
- b77c74c425898e5e5c35c07d16f011b3               38 Release
- 85693cce144f92da987a5fa37f38e137            16796 main/binary-amd64/Packages
- 406d29e2955952f1a5348b91b4c409d5             5900 main/binary-amd64/Packages.gz
+ d96360d72a2cafe3274379e7e6562bb9              215 Release
+ d5a20caf8098478dbcf9f4201cee1871            16799 main/binary-amd64/Packages
+ 131a17230c0f2d29b8cdae8f9ef8e51e             5870 main/binary-amd64/Packages.gz
 SHA1:
- c8f5fa5c54da7f7a0909d856b47d6a60747b9734               38 Release
- 54c41211e42c8d8841362523552116ffdb3f4271            16796 main/binary-amd64/Packages
- af782c944eafadcfe0339b3d7e4886687f0a1efc             5900 main/binary-amd64/Packages.gz
+ 28604ad1d44cef3e2f7bdd8c2127f32e80c14356              215 Release
+ 8f8e8b501a3bdc048a5dd79beb09dfeb53661575            16799 main/binary-amd64/Packages
+ 0aa4b30b38e131608bfbe549c9ba42648e738fd8             5870 main/binary-amd64/Packages.gz
 SHA256:
- 01e1d5c9d0e0b565278ad434dd9b414f13b9a22f754054a77d68638d3082ff01               38 Release
- 5ea7eefcd8092badaccbf1e673c25045901f8c67d344c6e62b9121598f769e60            16796 main/binary-amd64/Packages
- 557f641249dfc85135e02a3ab35a73b10316e1e434e1b0c3b0f89515d208a41d             5900 main/binary-amd64/Packages.gz
+ 0cf753b0d88c4406b4dfb6af144ddb686fe72342843bd13dca89c6ea1bb0bbcb              215 Release
+ 15be8bcd4b9640fd015b434367f95542ff4c2389cc088138b3a7945ae91e3575            16799 main/binary-amd64/Packages
+ 924f2bd7d77140138aff469df250e62b03881843ec600889f994bf63afcee769             5870 main/binary-amd64/Packages.gz
 SHA512:
- f441e25e78abdbea6cb1cfe22075253024b7f240919224121c15c9eb2ef0c016cfbcf92bde2f73918461b47cabc6c2bdbbb194ead5f717f04e99d468b2ba1e8d               38 Release
- 724d2dc750503fe7543bb3e10eae62e47877c0247ffb13be3b09143047397ff33d37875b11d155690d42f3081e94bdabbeae7514902625db19a272769a9b0da3            16796 main/binary-amd64/Packages
- 8cb280aab6d919ae60e864d0a7a2892d654d91cae9e43f35db5f5233918732192cdad0e9b6736f472b33e51a08b2754b049a8ba81b59eca13063420d5dfca26c             5900 main/binary-amd64/Packages.gz
+ 9b8a1215f253644b0774d4f9335eadaf095d81989182e25814038fe1e38c557622c47776fa0e0724f0cdaaba1cac11b54418bc4310c52caff917997804eede7a              215 Release
+ f6d505395cf95ce478525dfa3cef26f188c74a64abc4210eabc7e8fd24b7b79aa4d76f20215e77573f22c22741cf97ea7d8b4108b44e10fea28858dd862003ce            16799 main/binary-amd64/Packages
+ 6537e9ee92c54da0bd727d82158a473dbb94b451b1ce357957b92857919308573daceaafe640242bd4a992fefa43570adaf9bde24cab3193f2b919780b2d5afa             5870 main/binary-amd64/Packages.gz
