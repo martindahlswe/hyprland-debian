@@ -584,6 +584,46 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -B build && \
     cp -a /tmp/pkg/usr /tmp/deb/ && \
     dpkg-deb --build /tmp/deb /out/hypridle_0.1.7_amd64.deb
 
+################################################################################
+# 1️⃣3️⃣ hyprsunset v0.3.1
+################################################################################
+FROM base AS hyprsunset
+COPY --from=hyprwayland-scanner /out /deps
+COPY --from=hyprutils /out /deps
+COPY --from=hyprlang /out /deps
+COPY --from=hyprland-protocols /out /deps
+
+# Install runtime and build dependencies
+RUN apt-get update && apt-get install -y \
+    libwayland-dev wayland-protocols pkg-config cmake ninja-build git && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install Hyprland dependencies from previous stages
+RUN dpkg -i /deps/*.deb || apt-get -fy install
+
+# Clone and build hyprsunset
+WORKDIR /build
+RUN git clone --depth=1 --branch v0.3.1 https://github.com/hyprwm/hyprsunset.git
+WORKDIR /build/hyprsunset
+
+RUN cmake -B build -S . -G Ninja \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=/usr && \
+    cmake --build build -j"$(nproc)" && \
+    DESTDIR=/tmp/pkg cmake --install build && \
+    install -Dm644 LICENSE /tmp/pkg/usr/share/licenses/hyprsunset/LICENSE && \
+    mkdir -p /tmp/deb/DEBIAN && \
+    echo "Package: hyprsunset" > /tmp/deb/DEBIAN/control && \
+    echo "Version: 0.3.1" >> /tmp/deb/DEBIAN/control && \
+    echo "Section: utils" >> /tmp/deb/DEBIAN/control && \
+    echo "Priority: optional" >> /tmp/deb/DEBIAN/control && \
+    echo "Architecture: amd64" >> /tmp/deb/DEBIAN/control && \
+    echo "Maintainer: Hyprland Build <builder@example.com>" >> /tmp/deb/DEBIAN/control && \
+    echo "Depends: hyprlang (>= 0.6.4), hyprutils (>= 0.2.3), wayland-protocols, libwayland-client0" >> /tmp/deb/DEBIAN/control && \
+    echo "Description: Hyprsunset - blue-light filter for Hyprland" >> /tmp/deb/DEBIAN/control && \
+    cp -a /tmp/pkg/usr /tmp/deb/ && \
+    dpkg-deb --build /tmp/deb /out/hyprsunset_0.3.1_amd64.deb
+
 
 ################################################################################
 # Export all .deb files
@@ -601,3 +641,4 @@ COPY --from=hyprland-qtutils /out /out
 COPY --from=hyprpaper /out /out
 COPY --from=hyprlock /out /out
 COPY --from=hypridle /out /out
+COPY --from=hyprsunset /out /out
