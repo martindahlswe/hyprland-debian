@@ -65,11 +65,19 @@ jobs:
           gpg --batch --yes --pinentry-mode loopback --import private.key
           gpg --list-secret-keys
 
-      - name: Sign Release file
+
+      - name: Sign Release file (generate both Release.gpg and InRelease)
         run: |
+          # Detached signature (.gpg)
           gpg --batch --yes --pinentry-mode loopback \
               --default-key "${{ secrets.DEB_GPG_KEY_ID }}" \
               -abs -o dists/trixie/Release.gpg \
+              dists/trixie/Release
+      
+          # Clear-signed file (InRelease)
+          gpg --batch --yes --pinentry-mode loopback \
+              --default-key "${{ secrets.DEB_GPG_KEY_ID }}" \
+              --clearsign -o dists/trixie/InRelease \
               dists/trixie/Release
 
       - name: Securely delete private key
