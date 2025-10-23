@@ -505,7 +505,7 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -B build && \
     echo "Section: utils" >> /tmp/deb/DEBIAN/control && \
     echo "Priority: optional" >> /tmp/deb/DEBIAN/control && \
     echo "Architecture: amd64" >> /tmp/deb/DEBIAN/control && \
-    echo "Maintainer: Hyprland Build <builder@example.com>" >> /tmp/deb/DEBIAN/control && \
+    echo "Maintainer: Martin Dahl (martindahl16@icloud.com" >> /tmp/deb/DEBIAN/control && \
     echo "Depends: hyprutils (>= 0.10.0), hyprlang (>= 0.6.4), libhyprcursor0 (>= 0.1.13), hyprgraphics (>= 0.2.0), hyprland-protocols (>= 0.7.0)" >> /tmp/deb/DEBIAN/control && \
     echo "Description: Hyprpaper - wallpaper daemon for Hyprland" >> /tmp/deb/DEBIAN/control && \
     cp -a /tmp/pkg/usr /tmp/deb/ && \
@@ -541,7 +541,7 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -B build && \
     echo "Section: utils" >> /tmp/deb/DEBIAN/control && \
     echo "Priority: optional" >> /tmp/deb/DEBIAN/control && \
     echo "Architecture: amd64" >> /tmp/deb/DEBIAN/control && \
-    echo "Maintainer: Hyprland Build <builder@example.com>" >> /tmp/deb/DEBIAN/control && \
+    echo "Maintainer: Martin Dahl <martindahl16@icloud.com>" >> /tmp/deb/DEBIAN/control && \
     echo "Depends: hyprutils (>= 0.10.0), hyprlang (>= 0.6.4), libhyprcursor0 (>= 0.1.13), hyprgraphics (>= 0.2.0), hyprland-protocols (>= 0.7.0), libpam0g, libxkbcommon0, libinput10, libwayland-client0, libsdbus-c++2" >> /tmp/deb/DEBIAN/control && \
     echo "Description: Hyprlock - modern lock screen utility for Hyprland" >> /tmp/deb/DEBIAN/control && \
     cp -a /tmp/pkg/usr /tmp/deb/ && \
@@ -578,7 +578,7 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -B build && \
     echo "Section: utils" >> /tmp/deb/DEBIAN/control && \
     echo "Priority: optional" >> /tmp/deb/DEBIAN/control && \
     echo "Architecture: amd64" >> /tmp/deb/DEBIAN/control && \
-    echo "Maintainer: Hyprland Build <builder@example.com>" >> /tmp/deb/DEBIAN/control && \
+    echo "Maintainer: Martin Dahl <martindahl16@icloud.com>" >> /tmp/deb/DEBIAN/control && \
     echo "Depends: hyprutils (>= 0.10.0), hyprlang (>= 0.6.4), libsdbus-c++2, libwayland-client0, libxkbcommon0, libinput10" >> /tmp/deb/DEBIAN/control && \
     echo "Description: Hypridle - idle management daemon for Hyprland (triggers Hyprlock etc.)" >> /tmp/deb/DEBIAN/control && \
     cp -a /tmp/pkg/usr /tmp/deb/ && \
@@ -618,7 +618,7 @@ RUN cmake -B build -S . -G Ninja \
     echo "Section: utils" >> /tmp/deb/DEBIAN/control && \
     echo "Priority: optional" >> /tmp/deb/DEBIAN/control && \
     echo "Architecture: amd64" >> /tmp/deb/DEBIAN/control && \
-    echo "Maintainer: Hyprland Build <builder@example.com>" >> /tmp/deb/DEBIAN/control && \
+    echo "Maintainer: Martin Dahl <martindahl16@icloud.com>" >> /tmp/deb/DEBIAN/control && \
     echo "Depends: hyprlang (>= 0.6.4), hyprutils (>= 0.2.3), wayland-protocols, libwayland-client0" >> /tmp/deb/DEBIAN/control && \
     echo "Description: Hyprsunset - blue-light filter for Hyprland" >> /tmp/deb/DEBIAN/control && \
     cp -a /tmp/pkg/usr /tmp/deb/ && \
