@@ -1,0 +1,133 @@
+diff --git a/src/core/client/ClientSocket.cpp b/src/core/client/ClientSocket.cpp
+index 9754a4f..0869593 100644
+--- a/src/core/client/ClientSocket.cpp
++++ b/src/core/client/ClientSocket.cpp
+@@ -103,14 +103,16 @@ bool CClientSocket::dispatchEvents(bool block) {
+     if (sizeWritten <= 0)
+         return false;
+ 
+-    data.append_range(std::span<uint8_t>(buffer, sizeWritten));
++    auto span = std::span<uint8_t>(buffer, sizeWritten);
++    data.insert(data.end(), span.begin(), span.end());
+ 
+     while (sizeWritten == BUFFER_SIZE) {
+         sizeWritten = read(m_fd.get(), buffer, BUFFER_SIZE);
+         if (sizeWritten < 0)
+             return false;
+ 
+-        data.append_range(std::span<uint8_t>(buffer, sizeWritten));
++        auto span = std::span<uint8_t>(buffer, sizeWritten);
++        data.insert(data.end(), span.begin(), span.end());
+     }
+ 
+     g_messageParser->handleMessage(data, m_self.lock());
+diff --git a/src/core/message/messages/BindProtocol.cpp b/src/core/message/messages/BindProtocol.cpp
+index 4a9d33a..b7d7526 100644
+--- a/src/core/message/messages/BindProtocol.cpp
++++ b/src/core/message/messages/BindProtocol.cpp
+@@ -65,10 +65,15 @@ CBindProtocolMessage::CBindProtocolMessage(const std::string& protocol, uint32_t
+ 
+     m_data.emplace_back(HW_MESSAGE_MAGIC_TYPE_VARCHAR);
+ 
+-    m_data.append_range(g_messageParser->encodeVarInt(protocol.length()));
+-    m_data.append_range(protocol);
+-
+-    m_data.append_range(std::vector<uint8_t>{HW_MESSAGE_MAGIC_TYPE_UINT, 0, 0, 0, 0});
++    {
++    	    auto tmp = g_messageParser->encodeVarInt(protocol.length());
++    	        m_data.insert(m_data.end(), tmp.begin(), tmp.end());
++    }
++    
++    m_data.insert(m_data.end(), protocol.begin(), protocol.end());
++    
++    std::vector<uint8_t> marker{HW_MESSAGE_MAGIC_TYPE_UINT, 0, 0, 0, 0};
++    m_data.insert(m_data.end(), marker.begin(), marker.end());
+ 
+     *rc<uint32_t*>(&m_data[m_data.size() - 4]) = version;
+ 
+diff --git a/src/core/message/messages/HandshakeBegin.cpp b/src/core/message/messages/HandshakeBegin.cpp
+index 96ccb87..e4b528f 100644
+--- a/src/core/message/messages/HandshakeBegin.cpp
++++ b/src/core/message/messages/HandshakeBegin.cpp
+@@ -57,7 +57,10 @@ CHandshakeBeginMessage::CHandshakeBeginMessage(const std::vector<uint32_t>& vers
+         HW_MESSAGE_MAGIC_TYPE_UINT,
+     };
+ 
+-    m_data.append_range(g_messageParser->encodeVarInt(versions.size()));
++    {
++    	    auto tmp = g_messageParser->encodeVarInt(versions.size());
++    	        m_data.insert(m_data.end(), tmp.begin(), tmp.end());
++    }
+ 
+     const size_t HEAD_SIZE = m_data.size();
+ 
+diff --git a/src/core/message/messages/HandshakeProtocols.cpp b/src/core/message/messages/HandshakeProtocols.cpp
+index 9efa9d9..600b0f4 100644
+--- a/src/core/message/messages/HandshakeProtocols.cpp
++++ b/src/core/message/messages/HandshakeProtocols.cpp
+@@ -55,12 +55,17 @@ CHandshakeProtocolsMessage::CHandshakeProtocolsMessage(const std::vector<std::st
+         HW_MESSAGE_MAGIC_TYPE_ARRAY,
+         HW_MESSAGE_MAGIC_TYPE_VARCHAR,
+     };
+-
+-    m_data.append_range(g_messageParser->encodeVarInt(protocols.size()));
+-
++    {
++    	    auto tmp = g_messageParser->encodeVarInt(protocols.size());
++    	        m_data.insert(m_data.end(), tmp.begin(), tmp.end());
++    }
++    
+     for (const auto& p : protocols) {
+-        m_data.append_range(g_messageParser->encodeVarInt(p.size()));
+-        m_data.append_range(p);
++    	    {
++    		            auto len = g_messageParser->encodeVarInt(p.size());
++    			            m_data.insert(m_data.end(), len.begin(), len.end());
++    				        }
++    	        m_data.insert(m_data.end(), p.begin(), p.end());
+     }
+ 
+     m_data.emplace_back(HW_MESSAGE_MAGIC_END);
+diff --git a/src/core/server/ServerSocket.cpp b/src/core/server/ServerSocket.cpp
+index 69806af..854cdf7 100644
+--- a/src/core/server/ServerSocket.cpp
++++ b/src/core/server/ServerSocket.cpp
+@@ -222,14 +222,15 @@ void CServerSocket::dispatchClient(SP<CServerClient> client) {
+     if (sizeWritten <= 0)
+         return;
+ 
+-    data.append_range(std::span<uint8_t>(buffer, sizeWritten));
++    auto span = std::span<uint8_t>(buffer, sizeWritten);
++    data.insert(data.end(), span.begin(), span.end());
+ 
+     while (sizeWritten == BUFFER_SIZE) {
+         sizeWritten = read(client->m_fd.get(), buffer, BUFFER_SIZE);
+         if (sizeWritten < 0)
+             return;
+-
+-        data.append_range(std::span<uint8_t>(buffer, sizeWritten));
++       auto span = std::span<uint8_t>(buffer, sizeWritten);
++       data.insert(data.end(), span.begin(), span.end());
+     }
+ 
+     g_messageParser->handleMessage(data, client);
+diff --git a/src/core/wireObject/IWireObject.cpp b/src/core/wireObject/IWireObject.cpp
+index 903cd66..80046cf 100644
+--- a/src/core/wireObject/IWireObject.cpp
++++ b/src/core/wireObject/IWireObject.cpp
+@@ -99,8 +99,13 @@ uint32_t IWireObject::call(uint32_t id, ...) {
+             case HW_MESSAGE_MAGIC_TYPE_VARCHAR: {
+                 data.emplace_back(HW_MESSAGE_MAGIC_TYPE_VARCHAR);
+                 auto str = va_arg(va, const char*);
+-                data.append_range(g_messageParser->encodeVarInt(std::strlen(str)));
+-                data.append_range(std::string_view(str));
++
++		{
++			    auto tmp = g_messageParser->encodeVarInt(std::strlen(str));
++			        data.insert(data.end(), tmp.begin(), tmp.end());
++		}
++		data.insert(data.end(), str, str + std::strlen(str));
++
+                 break;
+             }
+ 
