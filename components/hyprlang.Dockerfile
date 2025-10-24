@@ -4,7 +4,7 @@
 ################################################################################
 
 # Start from the shared base image
-FROM hyprland-base AS hyprlang
+FROM base AS hyprlang
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprlang"

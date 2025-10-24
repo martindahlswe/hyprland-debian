@@ -26,10 +26,10 @@ endef
 # Targets
 # ------------------------------------------------------------------------------
 
-.PHONY: all clean base hyprwayland-scanner hyprutils aquamarine hyprlang
+.PHONY: all clean base hyprwayland-scanner hyprutils aquamarine hyprlang hyprcursor hyprlad-protocols hyprgraphics hyprland hyprland-qtutils hyprpaper hyprlock hypridle hyprsunset
 
 # Default target builds everything
-all: base hyprwayland-scanner hyprutils aquamarine hyprlang
+all: base hyprwayland-scanner hyprutils aquamarine hyprlang hyprcursor hyprlad-protocols hyprgraphics hyprland hyprland-qtutils hyprpaper hyprlock hypridle hyprsunset
 
 # ------------------------------------------------------------------------------
 # Base image

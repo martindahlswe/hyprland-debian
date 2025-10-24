@@ -3,7 +3,7 @@
 # Modern lock screen utility for Hyprland
 ################################################################################
 
-FROM hyprland-base AS hyprlock
+FROM base AS hyprlock
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprlock"

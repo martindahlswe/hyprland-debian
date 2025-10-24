@@ -4,7 +4,7 @@
 ################################################################################
 
 # Start from your previously built base image
-FROM hyprland-base AS hyprwayland-scanner
+FROM base AS hyprwayland-scanner
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprwayland-scanner"

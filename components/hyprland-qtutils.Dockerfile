@@ -3,7 +3,7 @@
 # Qt6 utilities for Hyprland-based tools
 ################################################################################
 
-FROM hyprland-base AS hyprland-qtutils
+FROM base AS hyprland-qtutils
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprland-qtutils"

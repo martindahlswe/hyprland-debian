@@ -3,7 +3,7 @@
 # Wallpaper daemon for Hyprland
 ################################################################################
 
-FROM hyprland-base AS hyprpaper
+FROM base AS hyprpaper
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprpaper"

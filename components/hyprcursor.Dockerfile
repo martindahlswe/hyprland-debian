@@ -3,7 +3,7 @@
 # Hyprland cursor format, library, and utilities
 ################################################################################
 
-FROM hyprland-base AS hyprcursor
+FROM base AS hyprcursor
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprcursor"

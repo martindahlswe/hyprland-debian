@@ -3,7 +3,7 @@
 # Idle management daemon for Hyprland (triggers Hyprlock etc.)
 ################################################################################
 
-FROM hyprland-base AS hypridle
+FROM base AS hypridle
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hypridle"

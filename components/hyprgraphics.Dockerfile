@@ -3,7 +3,7 @@
 # GPU abstraction and rendering utilities for Hyprland
 ################################################################################
 
-FROM hyprland-base AS hyprgraphics
+FROM base AS hyprgraphics
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprgraphics"

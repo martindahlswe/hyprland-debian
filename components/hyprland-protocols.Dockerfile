@@ -3,7 +3,7 @@
 # Hyprland-specific Wayland protocol definitions
 ################################################################################
 
-FROM hyprland-base AS hyprland-protocols
+FROM base AS hyprland-protocols
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprland-protocols"

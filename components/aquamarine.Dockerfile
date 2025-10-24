@@ -4,14 +4,14 @@
 ################################################################################
 
 # Start from the common base image
-FROM hyprland-base AS aquamarine
+FROM base AS aquamarine
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/aquamarine"
 
 # --- Bring in previously built dependencies (.deb packages) ---
-COPY --from=hyprland-hyprwayland-scanner /out /deps
-COPY --from=hyprland-hyprutils /out /deps
+COPY --from=hyprwayland-scanner /out /deps
+COPY --from=hyprutils /out /deps
 
 # --- Install dependencies ---
 RUN apt-get update && \

@@ -3,7 +3,7 @@
 # Dynamic tiling Wayland compositor for Linux
 ################################################################################
 
-FROM hyprland-base AS hyprland
+FROM base AS hyprland
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/Hyprland"

@@ -3,7 +3,7 @@
 # Blue-light filter / night mode utility for Hyprland
 ################################################################################
 
-FROM hyprland-base AS hyprsunset
+FROM base AS hyprsunset
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprsunset"
