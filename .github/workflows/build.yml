@@ -50,7 +50,7 @@ jobs:
           set -eux
           mkdir -p "${OUT_DIR}"
           echo "🔨 Building base image..."
-          podman build -f components/base.Dockerfile -t hyprland-base .
+          podman build -f components/base.Dockerfile -t base .
 
           COMPONENTS=(
             hyprwayland-scanner
