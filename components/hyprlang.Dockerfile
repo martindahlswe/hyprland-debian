@@ -12,7 +12,6 @@ LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprlang"
 # --- Dependencies: hyprutils (for linking and CMake config) ---
 COPY --from=hyprutils /out /deps
 RUN apt-get update && \
-    apt-get install -y cmake git && \
     dpkg -i /deps/*.deb || apt-get -fy install && \
     rm -rf /var/lib/apt/lists/*
 

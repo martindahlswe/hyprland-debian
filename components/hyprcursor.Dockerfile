@@ -14,7 +14,6 @@ COPY --from=hyprlang /out /deps
 
 # --- Install dependencies ---
 RUN apt-get update && \
-    apt-get install -y git cmake libzip-dev libtomlplusplus-dev librsvg2-dev libcairo2-dev && \
     apt-get install -y /deps/*.deb || apt-get -f install -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 

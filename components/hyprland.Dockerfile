@@ -19,12 +19,6 @@ COPY --from=hyprgraphics /out /deps
 
 # --- Install dependencies ---
 RUN apt-get update && \
-    apt-get install -y \
-    git cmake meson ninja-build make pkg-config \
-    libxcb-icccm4 libxcb-composite0 libxcb-res0 libxcb-errors-dev \
-    libxkbcommon0 libxcursor1 libinput10 libre2-11 \
-    libgles2-mesa-dev libopengl0 libseat1 libdisplay-info2 \
-    libdrm2 libpixman-1-0 libwayland-client0 libwayland-server0 libre2-dev && \
     apt-get install -y /deps/*.deb || apt-get -f install -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 

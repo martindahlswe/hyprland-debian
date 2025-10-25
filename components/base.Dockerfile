@@ -11,17 +11,55 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get install -y \
+    # build tools
     git wget curl make pkg-config fakeroot dpkg-dev devscripts equivs \
     build-essential cmake ninja-build meson gettext-base \
-    fontconfig libfontconfig-dev \
-    libffi-dev libxml2-dev libdrm-dev libmagic-dev \
-    libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd \
-    libegl-dev libgles2-mesa-dev glslang-tools \
-    libinput-dev libxcb-composite0-dev libxcb-ewmh-dev libxcb-present-dev \
-    libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev \
-    libxcb-errors-dev hwdata libwayland-client0 libwayland-dev wayland-protocols \
-    libgbm-dev libdisplay-info-dev libxcursor-dev \
-    libzip-dev libcairo2-dev librsvg2-dev libtomlplusplus-dev \
+    # aquamarine
+    libseat-dev \
+    # hyprwayland-scanner & hyprwire & hyprtoolkit
+    libpugixml-dev \
+    # hyprcursor
+    libzip-dev libtomlplusplus-dev librsvg2-dev libcairo2-dev \
+    # aquamarine & hyprland-protocols
+    wayland-protocols \
+    # hyprgraphics
+    libegl-dev libgl1-mesa-dev libmagic-dev \
+    # hyprgraphics & hyprtoolkit
+    libgbm-dev \
+    # hyprgraphics & hyprtoolkit & xdg-desktop-portal-hyprland
+    libdrm-dev \
+    # hyprland
+    libxcb-icccm4 libxcb-composite0 libxcb-res0 libxcb-errors-dev \
+    libxkbcommon0 libxcursor1 libinput10 libre2-11 \
+    libgles2-mesa-dev libopengl0 libseat1 libdisplay-info2 \
+    libdrm2 libpixman-1-0 libwayland-client0 libwayland-server0 libre2-dev \
+    # hyprland-qtutils
+    qt6-base-dev qt6-base-dev-tools qt6-tools-dev qt6-tools-dev-tools \
+    qt6-declarative-dev qt6-declarative-dev-tools qt6-wayland-dev \
+    qt6-l10n-tools libqt6core6 libqt6gui6 libqt6widgets6 libqt6quick6 libqt6waylandclient6 \
+    # aquamarine & hyprpaper & hyprsunset & hyprtoolkit & xdg-desktop-portal-hyprland
+    libwayland-dev \
+    # aquamarine & hyprlock 6 hypridle
+    libinput-dev \
+    # hyprlock
+    libpam0g-dev \
+    # hyprlock & hypridle & hyprtoolkit
+    libxkbcommon-dev \
+    # hyprlock & hypridle
+    libsdbus-c++-dev \
+    # hyprwire
+    libffi-dev \
+    # hyprtoolkit
+    libpixman-1-dev libpango1.0-dev libiniparser-dev \
+    # xdg-desktop-portal-hyprland
+    libdbus-1-dev libpipewire-0.3-dev libwlroots-0.18-dev \
+    # The rest
+    fontconfig libfontconfig-dev libxml2-dev \
+    seatd \
+    glslang-tools \
+    libxcb-composite0-dev libxcb-ewmh-dev libxcb-present-dev \
+    libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev hwdata \
+    libdisplay-info-dev libxcursor-dev \
     xdg-desktop-portal-wlr \
     ca-certificates locales \
     && apt-get clean && rm -rf /var/lib/apt/lists/*

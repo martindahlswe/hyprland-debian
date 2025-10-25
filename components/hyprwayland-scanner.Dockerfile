@@ -11,12 +11,6 @@ LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprwayland-sca
 
 WORKDIR /build
 
-# Install dependencies
-RUN apt-get update && \
-    apt-get install -y \
-    libpugixml-dev \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
 # --- Clone source ---
 RUN git clone --depth=1 --branch v0.4.5 https://github.com/hyprwm/hyprwayland-scanner.git
 WORKDIR /build/hyprwayland-scanner

@@ -14,7 +14,6 @@ COPY --from=hyprland-protocols /out /deps
 
 # --- Install dependencies ---
 RUN apt-get update && \
-    apt-get install -y git cmake libdrm-dev libgbm-dev libegl-dev libgl1-mesa-dev libmagic-dev && \
     apt-get install -y /deps/*.deb || apt-get -f install -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 

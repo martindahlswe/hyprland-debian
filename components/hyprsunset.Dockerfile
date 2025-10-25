@@ -16,13 +16,6 @@ COPY --from=hyprland-protocols /out /deps
 
 # --- Build dependencies ---
 RUN apt-get update && \
-    apt-get install -y \
-    libwayland-dev \
-    wayland-protocols \
-    pkg-config \
-    cmake \
-    ninja-build \
-    git && \
     apt-get install -y /deps/*.deb || apt-get -f install -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 

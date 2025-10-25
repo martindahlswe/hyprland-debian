@@ -18,12 +18,6 @@ COPY --from=hyprland-protocols /out /deps
 
 # --- System dependencies ---
 RUN apt-get update && \
-    apt-get install -y \
-    libpam0g-dev \
-    libxkbcommon-dev \
-    libinput-dev \
-    libsdbus-c++-dev \
-    cmake ninja-build pkg-config git && \
     apt-get install -y /deps/*.deb || apt-get -f install -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 

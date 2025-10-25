@@ -15,7 +15,6 @@ COPY --from=hyprutils /out /deps
 
 # --- Install dependencies ---
 RUN apt-get update && \
-    apt-get install -y libpugixml1v5 libegl-dev libgles2-mesa-dev libdrm-dev libgbm-dev libffi-dev libpixman-1-dev libwayland-dev && \
     dpkg -i /deps/*.deb || apt-get -fy install && \
     rm -rf /var/lib/apt/lists/*
 

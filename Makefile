@@ -26,10 +26,44 @@ endef
 # Targets
 # ------------------------------------------------------------------------------
 
-.PHONY: all clean base hyprwayland-scanner hyprutils aquamarine hyprlang hyprcursor hyprlad-protocols hyprgraphics hyprland hyprland-qtutils hyprpaper hyprlock hypridle hyprsunset
+.PHONY: \
+	all \
+	clean \
+	base \
+	hyprwayland-scanner \
+	hyprutils \
+	aquamarine \
+	hyprlang \
+	hyprcursor \
+	hyprlad-protocols \
+	hyprgraphics hyprland \
+	hyprland-qtutils \
+	hyprpaper \
+	hyprlock \
+	hypridle \
+	hyprsunset \
+	hyprwire \
+	hyprtoolkit \
+	xdg-desktop-portal-hyprland
 
 # Default target builds everything
-all: base hyprwayland-scanner hyprutils aquamarine hyprlang hyprcursor hyprlad-protocols hyprgraphics hyprland hyprland-qtutils hyprpaper hyprlock hypridle hyprsunset
+all: \
+	base \
+	hyprwayland-scanner \
+	hyprutils aquamarine \
+	hyprlang \
+	hyprcursor \
+	hyprland-protocols \
+	hyprgraphics \
+	hyprland \
+	hyprland-qtutils \
+	hyprpaper \
+	hyprlock \
+	hypridle \
+	hyprsunset \
+	hyprwire \
+	hyprtoolkit \
+	xdg-desktop-portal-hyprland
 
 # ------------------------------------------------------------------------------
 # Base image
@@ -125,6 +159,34 @@ hyprsunset: hyprwayland-scanner hyprutils hyprlang hyprland-protocols
 	$(call build_component,hyprsunset)
 
 # ------------------------------------------------------------------------------
+# hyprwire
+# ------------------------------------------------------------------------------
+.PHONY: hyprwire
+hyprwire: hyprwayland-scanner hyprutils hyprlang hyprland-protocols
+	$(call build_component,hyprwire)
+
+# ------------------------------------------------------------------------------
+# hyprtoolkit
+# ------------------------------------------------------------------------------
+.PHONY: hyprtoolkit
+hyprtoolkit: hyprutils hyprlang hyprgraphics hyprwayland-scanner aquamarine
+	$(call build_component,hyprtoolkit)
+
+# ------------------------------------------------------------------------------
+# xdg-desktop-portal-hyprland
+# ------------------------------------------------------------------------------
+.PHONY: xdg-desktop-portal-hyprland
+xdg-desktop-portal-hyprland: hyprwayland-scanner hyprutils hyprlang hyprland-protocols
+	$(call build_component,xdg-desktop-portal-hyprland)
+
+# ------------------------------------------------------------------------------
+# hyprlauncher
+# ------------------------------------------------------------------------------
+#.PHONY: hyprlauncher
+#hyprlauncher: hyprlang hyprtoolkit hyprutils hyprwire
+#	$(call build_component,hyprlauncher)
+
+# ------------------------------------------------------------------------------
 # Utility targets
 # ------------------------------------------------------------------------------
 
@@ -149,7 +211,10 @@ export-all: \
 	$(OUT_DIR)/hyprpaper \
 	$(OUT_DIR)/hyprlock \
 	$(OUT_DIR)/hypridle \
-	$(OUT_DIR)/hyprsunset
+	$(OUT_DIR)/hyprsunset \
+	$(OUT_DIR)/hyprwire \
+	$(OUT_DIR)/hyprtoolkit \
+	$(OUT_DIR)/xdg-desktop-portal-hyprland
 
 $(OUT_DIR)/%:
 	@echo "📦 Exporting .deb files for $*..."

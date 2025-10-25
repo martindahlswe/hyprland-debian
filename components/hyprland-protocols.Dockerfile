@@ -8,11 +8,6 @@ FROM base AS hyprland-protocols
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
 LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprland-protocols"
 
-# --- Dependencies ---
-RUN apt-get update && \
-    apt-get install -y git meson ninja-build wayland-protocols && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
 # --- Clone source ---
 WORKDIR /build
 RUN git clone --depth=1 --branch v0.7.0 https://github.com/hyprwm/hyprland-protocols.git

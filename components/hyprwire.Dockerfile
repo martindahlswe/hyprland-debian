@@ -16,7 +16,6 @@ COPY --from=hyprland-protocols /out /deps
 
 # --- Install dependencies ---
 RUN apt-get update && \
-    apt-get install -y git cmake pkg-config libffi-dev libpugixml-dev && \
     apt-get install -y /deps/*.deb || apt-get -f install -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 

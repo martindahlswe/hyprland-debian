@@ -19,9 +19,6 @@ COPY --from=hyprland-protocols /out /deps
 
 # --- Install system dependencies ---
 RUN apt-get update && \
-    apt-get install -y git cmake ninja-build pkg-config \
-    libdrm-dev libegl-dev libgbm-dev libxkbcommon-dev \
-    libpixman-1-dev libpango1.0-dev libwayland-dev libiniparser-dev && \
     apt-get install -y /deps/*.deb || apt-get -f install -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 

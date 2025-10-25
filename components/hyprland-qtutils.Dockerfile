@@ -14,12 +14,6 @@ COPY --from=hyprlang /out /deps
 
 # --- Install dependencies (Qt6 + Hypr libraries) ---
 RUN apt-get update && \
-    apt-get install -y \
-    git cmake ninja-build pkg-config \
-    qt6-base-dev qt6-base-dev-tools qt6-tools-dev qt6-tools-dev-tools \
-    qt6-declarative-dev qt6-declarative-dev-tools qt6-wayland-dev \
-    qt6-l10n-tools \
-    libqt6core6 libqt6gui6 libqt6widgets6 libqt6quick6 libqt6waylandclient6 && \
     apt-get install -y /deps/*.deb || apt-get -f install -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
