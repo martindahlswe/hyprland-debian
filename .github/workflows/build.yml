@@ -66,6 +66,8 @@ jobs:
             hyprlock
             hypridle
             hyprsunset
+            hyprwire
+            hyprtoolkit 
           )
 
           for c in "${COMPONENTS[@]}"; do
