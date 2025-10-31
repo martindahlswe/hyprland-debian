@@ -1,0 +1,24 @@
+Architectures: amd64
+Codename: trixie
+Components: main
+Date: Fri, 31 Oct 2025 17:36:42 +0000
+Description: Hyprland ecosystem packages for Debian trixie
+Label: Hyprland Debian Repo
+Origin: Hyprland Debian Repo
+Suite: trixie
+MD5Sum:
+ 127e093819f4337c5b8e209f439fd8a7              223 Release
+ 95485b26fe45d267409f39e43118077d            25246 main/binary-amd64/Packages
+ 13b8230139506ab6b031750b473a5818             8800 main/binary-amd64/Packages.gz
+SHA1:
+ d40abd6028af69945f7de704878cd5f61757b194              223 Release
+ dc09efc0676d659f98a39d3f8364ed0cee9dad18            25246 main/binary-amd64/Packages
+ 8de3dd3db53ab979ac1c8da1077a0ba4cfe24923             8800 main/binary-amd64/Packages.gz
+SHA256:
+ 4f04e8175602f207775028d71dd49fadb4a129db6d0f6bd6ced46578b3169314              223 Release
+ 9c1f4a75e15e60ae1445f2bdb29d00fd6ee15c57068908ad4b2100b63d2c5de3            25246 main/binary-amd64/Packages
+ 6eb7b530fd8ce7d9ee8461054784a8e1b6cff1901cffcd3ce761cd3082fe8484             8800 main/binary-amd64/Packages.gz
+SHA512:
+ 189836d52c59a8f208fed06babb4cf05d8acdcc96c5860554a5e734ab9603649566002427651426a61fecfe072c853923d43fdcc57001381469fc5912c8b32c8              223 Release
+ 9ded62dea46787cb39983904f75a7b9d6774f250f5ccca006ed8347726e7fc38a7486697d739f88208ae77c1237a5939d38f84eef7e5ad22714651388df4e058            25246 main/binary-amd64/Packages
+ 4509b2a068aa08bb0b245eab1c228dc089c0fffd4b7a5ef9f29c2b1b8bfd34f544534f26f2ac5b3fec0ecd0c8468557ca53dbcbe59430d58c397982e3f105955             8800 main/binary-amd64/Packages.gz
