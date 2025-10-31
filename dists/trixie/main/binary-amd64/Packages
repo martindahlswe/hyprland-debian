@@ -79,12 +79,12 @@ Depends: libc6 (>= 2.34), libstdc++6 (>= 12), libpixman-1-0, libxkbcommon0,
  libhyprgraphics1 (>= 0.2.0), libaquamarine8 (>= 0.9.5),
  libhyprtoolkit1 (>= 0.1.1), libhyprwire0 (>= 0.1.0)
 Filename: pool/main/h/hyprland-bin_0.49.0_amd64.deb
-Size: 49164328
-MD5sum: 03c4c5311a118b4d72faaf68f5f536d9
-SHA1: 9fb426e3d815c95292379ac89b4ea3b8855ccc16
-SHA256: b0896418783072cf6451007544efb6c1824bc23749a293edc6bfee3fb0d0c82e
-SHA512: 543615cb9a4cab2c8d6e1befa78cb7b79294e6165828d20435d9c124d900aa266a90f7f08adfd17230b1a7a74adc16bc7564488c3faf5bd3c33298302288c2a0
-Homepage: https://github.com/hyprwm/Hyprland
+Size: 49164112
+MD5sum: 8d0a9bb2472ec83ff6c65ce7f514b5f5
+SHA1: a2b1eb60c22eda7845743d84a773ad0307ba2531
+SHA256: d19a3dfa38b46b2c2b1853c3cb04f4895f3a467a27ad0415a4e4daccd3d3306d
+SHA512: 7787c541e58ff6f2d22ab157b26632207f2c98f6b5de7f771f3fcce30b9d645982e27731cd17599a661085a7db9708f9c6bfb87e8f3b7b6a8ccd0b3583b7555a
+Homepage: https://github.com/hyprwm/hyprland
 Description: Hyprland Wayland compositor (runtime)
 
 Package: hyprland-dev
@@ -95,12 +95,12 @@ Section: libdevel
 Maintainer: Martin Dahl <martindahl16@icloud.com>
 Depends: hyprland-bin (= 0.49.0)
 Filename: pool/main/h/hyprland-dev_0.49.0_amd64.deb
-Size: 349908
-MD5sum: 2276eaf7a13a9f60fee72b0837d49fb4
-SHA1: b1fee6de27da30d4f91ec9b5223573403e03da25
-SHA256: 955e7d484276f36552c0d9ab7f1882614a622d446ae2a60998e40060d30d9ef9
-SHA512: eafbe8fcd15dec818b01c614bd3c53023fe9751613691670c8f27b889d6899f48335aa99eb8cea29e6bcf0c99fb157357ee76c6374dd302f7defc90e948dfd54
-Homepage: https://github.com/hyprwm/Hyprland
+Size: 349944
+MD5sum: fb447674ee55794d72975366a22eec51
+SHA1: e5762977b432e9d5fbcce2e6a69e9fc413f1b952
+SHA256: 4ea61cec8058e7d339a957a5dddecea0272c803b5b1464a5f0534a6b92a9b1ad
+SHA512: e671f8f9f78e570e2930038765bf0e4f8d43fe585a63f3122df87195cd1c2dcdee32d4cf5e5c39b98f3ec1d3f47fbed624cb4b4eb0cbf15083a495ade0c89711
+Homepage: https://github.com/hyprwm/hyprland
 Description: Development headers, CMake and pkg-config files for Hyprland
 
 Package: hyprland-protocols
@@ -145,12 +145,12 @@ Section: misc
 Maintainer: Martin Dahl <martindahl16@icloud.com>
 Depends: hyprland-bin (= 0.49.0)
 Filename: pool/main/h/hyprland_0.49.0_all.deb
-Size: 736
-MD5sum: a3578da43ed03cb05b9258f6745d0195
-SHA1: 47d17a07d55d638376196f2fde0a5f83016ef674
-SHA256: 0fdf3fe4f62d13f5f0e5f56b6bc702ee9f2c9865fc0087cada08e605b5e23480
-SHA512: e76e839770743a5c23a267c4333f50f105b6e40f983f6fee0943a50d67abd56b1d57aa280bebf434c71f6668be9adda9802bc2fc72e5e1814e458adeb32b9f38
-Homepage: https://github.com/hyprwm/Hyprland
+Size: 740
+MD5sum: 6aa2e050a794db4610d87d6e590a0654
+SHA1: 2697566dd2bd6c706bc4bc27b0df606453296f86
+SHA256: b6bba2795967be065222ea7b99884282ee48a352599e51f050e702fdd1732bdf
+SHA512: 169b1bc740363b3f921b01628c6d0841a55c7b4f2d9266caf574e1ff3a5848828b1a7419774e9819344496c10ebc47c7b953d0700bcc0014cd49f87de0956919
+Homepage: https://github.com/hyprwm/hyprland
 Description: Hyprland meta package
 
 Package: hyprlang
@@ -292,11 +292,11 @@ Depends: libhyprwire0 (= 0.1.1), libc6 (>= 2.38)
 Breaks: libhyprwire0 (<= 0.1.0)
 Replaces: libhyprwire0 (<= 0.1.0)
 Filename: pool/main/h/hyprwire_0.1.1_amd64.deb
-Size: 73616
-MD5sum: 52c3d9c3dcc268ce68b315852f7f6a8a
-SHA1: 9c42d91a9499c9f86f212e70334593a9d991d49f
-SHA256: a612ad6c06f9eb3971af484e49c0f66116a2020fe33b24a76179a24b62cf639d
-SHA512: 7cb8b65c725911f6a77b3095833d745119a80e1c0bd208e14a5abc665c020311b1397b908d33725a8ab123201055ff856f6109b77f07f873a0dfb6f7a0b40145
+Size: 73632
+MD5sum: c3b14527e71dcbc3ab4c0182dd27b9a5
+SHA1: 221f1d295cc3f12bff0e8b35e19cc41bd88eadef
+SHA256: 7c4f7ef83e77785089c7edc83889eb766138e8dddbe095c19087eeb05e0de83b
+SHA512: 152cc60e677d750cf54c714f1d3f4cb30a052f34a6ce4d6cb110cc682986f9f372bfd843ef9d56a6106a571255ed77d3749783a4c8529b58f7db24f0c9cfd438
 Description: Hyprwire runtime utilities and CLI tools
 
 Package: libaquamarine-dev
@@ -519,10 +519,10 @@ Maintainer: Martin Dahl <martindahl16@icloud.com>
 Depends: libhyprwire0 (= 0.1.1), libhyprutils-dev (>= 0.10.0)
 Filename: pool/main/l/libhyprwire-dev_0.1.1_amd64.deb
 Size: 2596
-MD5sum: 2091e606906bf7f5706fb381b10d0783
-SHA1: e94f9f4c56f8544ff3796339bf37993ff9a77369
-SHA256: cbdc09c3457cd0995768cd7963010e53c32b65c29efd10fbb1eaf71ecdd2dee2
-SHA512: d6899be7550c446b3cb30cc9edebef4328d6c3dad6253a8d5550e47dcd89a3589cd7dc8987d2709b4ebabf482c0310fff205a01611140ea14abc36e0a0f2a5cf
+MD5sum: 2fde39d85b5eba4731590efc829b7ca3
+SHA1: 8150db206413aefab641bdb1cfba5070a84be640
+SHA256: b5e0ee484c68026769cd766254c9e771ca8a8ef62544da60e77748a9e2111409
+SHA512: 78c6c550aa2e296721a88105a93d8d74225fbcfd417954c3a6a223c92c2bfe786aadacec831104eb0fb23728c8ec2d173ba1d931f2eaa4965d0d757e778c27d9
 Description: Development headers and pkg-config for Hyprwire
 
 Package: libhyprwire0
@@ -533,11 +533,12 @@ Section: libs
 Maintainer: Martin Dahl <martindahl16@icloud.com>
 Depends: libc6 (>= 2.38), libstdc++6 (>= 13)
 Filename: pool/main/l/libhyprwire0_0.1.1_amd64.deb
-Size: 112568
-MD5sum: f0c4ad077951cb692d8a1147653a33d7
-SHA1: 5b3a68a8c028706265151c5e61c308efad143768
-SHA256: 3d850d47ff6aa85f08523dc864e3d5151f14eb94274d9d39e756616a7d311023
-SHA512: e073cefd90d42b57d3a7af66f97df6a03599e27851570afe82aa0876876bb32f3d8092a2e77b9474dd09752d765914e457c9e9c89151a33780264be5b6a0190b
+Size: 112484
+MD5sum: bf3a704be25379ca8762c8ebde5a54b1
+SHA1: 5bd2d9c1a2f436bb2ca0a5548bb1ddb36820c857
+SHA256: c62b22daed5d61046db97a774b8565b569b3500feafe0ca961e64bad7a4e5e3f
+SHA512: 5543bef16d6467cb76ec993d7b5a678ca6d34103aebc5ed1965e8aa64d9541ed30fe8bd1ddad7d0824a2b37ce9a2bd7a8d74e9f26ee91d3c3ea5ac9293f44319
+Homepage: https://github.com/hyprwm/hyprwire
 Description: Hyprwire shared library for Hyprland components
 
 Package: swaync
