@@ -1,6 +1,6 @@
 ################################################################################
 # 🔟 hyprlauncher v0.1.1
-# Hyprland launcher GUI – depends on hyprwire, hyprtoolkit, hyprutils, hyprlang
+# Hyprland launcher GUI
 ################################################################################
 
 FROM docker.io/martindahlswe/hyprland-debian-base:0.49.0 AS hyprlauncher

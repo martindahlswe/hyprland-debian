@@ -1,7 +1,6 @@
 ################################################################################
-# 1️⃣ hyprwayland-scanner v${VERSION}
+# hyprwayland-scanner v0.4.5
 # Hyprland's C++ Wayland protocol scanner and code generator
-# ➕ Includes synthetic CMake and pkg-config metadata for downstream builds
 ################################################################################
 
 FROM docker.io/martindahlswe/hyprland-debian-base:0.49.0 AS hyprwayland-scanner

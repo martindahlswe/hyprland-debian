@@ -1,6 +1,6 @@
 ################################################################################
-# 9️⃣ hyprtoolkit v${VERSION}
-# Hyprland UI toolkit – depends on hyprgraphics v${VERSION} and aquamarine v0.9.5
+# hyprtoolkit v0.2.0
+# Hyprland UI toolkit
 ################################################################################
 
 FROM docker.io/martindahlswe/hyprland-debian-base:0.49.0 AS hyprtoolkit

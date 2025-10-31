@@ -1,5 +1,6 @@
 ##############################################################
-# Stage: hyprwire
+# hyprwire v0.1.1
+# A fast and consistent wire protocol for IPC 
 ##############################################################
 FROM docker.io/martindahlswe/hyprland-debian-base:0.49.0 AS hyprwire
 
@@ -54,6 +55,7 @@ Section: libs
 Priority: optional
 Architecture: amd64
 Maintainer: Martin Dahl <martindahl16@icloud.com>
+Homepage: https://github.com/hyprwm/hyprwire
 Description: Hyprwire shared library for Hyprland components
 Depends: libc6 (>= 2.38), libstdc++6 (>= 13)
 EOF

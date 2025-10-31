@@ -6,11 +6,10 @@
 FROM docker.io/martindahlswe/hyprland-debian-base:0.49.0 AS hyprland
 
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
-LABEL org.opencontainers.image.source="https://github.com/hyprwm/Hyprland"
+LABEL org.opencontainers.image.source="https://github.com/hyprwm/hyprland"
 
 # ---- Version pins ----
 ARG VERSION=0.49.0
-ARG VERSION=${VERSION}
 
 # ---- Bring in all Hypr dependencies ----
 COPY --from=hyprutils           /out /deps
@@ -29,8 +28,8 @@ RUN apt-get update && \
 
 # ---- Fetch source ----
 WORKDIR /build
-RUN git clone --depth=1 --branch v${VERSION} https://github.com/hyprwm/Hyprland.git
-WORKDIR /build/Hyprland
+RUN git clone --depth=1 --branch v${VERSION} https://github.com/hyprwm/hyprland.git
+WORKDIR /build/hyprland
 
 # ---- Environment sanity ----
 ENV CMAKE_BUILD_PARALLEL_LEVEL="8" \
@@ -53,7 +52,7 @@ Section: x11
 Priority: optional
 Architecture: amd64
 Maintainer: Martin Dahl <martindahl16@icloud.com>
-Homepage: https://github.com/hyprwm/Hyprland
+Homepage: https://github.com/hyprwm/hyprland
 Depends: libc6 (>= 2.34), libstdc++6 (>= 12), libpixman-1-0, libxkbcommon0,
  libinput10, libdrm2, libudev1, libseat1, libhyprutils9 (>= 0.10.0),
  libhyprlang2 (>= 0.6.4), libhyprcursor1 (>= 0.1.11),
@@ -79,7 +78,7 @@ Section: libdevel
 Priority: optional
 Architecture: amd64
 Maintainer: Martin Dahl <martindahl16@icloud.com>
-Homepage: https://github.com/hyprwm/Hyprland
+Homepage: https://github.com/hyprwm/hyprland
 Depends: hyprland-bin (= ${VERSION})
 Description: Development headers, CMake and pkg-config files for Hyprland
 EOF
@@ -99,7 +98,7 @@ Section: misc
 Priority: optional
 Architecture: all
 Maintainer: Martin Dahl <martindahl16@icloud.com>
-Homepage: https://github.com/hyprwm/Hyprland
+Homepage: https://github.com/hyprwm/hyprland
 Depends: hyprland-bin (= ${VERSION})
 Description: Hyprland meta package
 EOF

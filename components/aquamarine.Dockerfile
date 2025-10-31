@@ -1,5 +1,5 @@
 ################################################################################
-# 7️⃣ aquamarine v${VERSION}
+# 7️⃣ aquamarine v$0.9.5
 # Hyprland's rendering + composition backend (EGL/DRM abstraction layer)
 ################################################################################
 

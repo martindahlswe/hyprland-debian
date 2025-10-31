@@ -1,5 +1,6 @@
 ################################################################################
-# hyprland-protocols v${VERSION} — Meson-based Debian build
+# hyprland-protocols v0.7.0
+# Wayland protocol extensions for Hyprland
 ################################################################################
 
 FROM docker.io/martindahlswe/hyprland-debian-base:0.49.0 AS hyprland-protocols

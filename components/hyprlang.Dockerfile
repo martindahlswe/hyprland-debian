@@ -1,5 +1,5 @@
 ################################################################################
-# 4️⃣ hyprlang v${VERSION}
+# 4️⃣ hyprlang v0.6.4
 # Fast and user-friendly configuration language for the Hyprland ecosystem
 ################################################################################
 

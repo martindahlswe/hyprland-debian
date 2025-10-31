@@ -1,4 +1,12 @@
+##############################################################
+# Sway Notification Center v0.12.2
+# A simple GTK based notification daemon for any Wayland compositor
+##############################################################
+
 FROM docker.io/martindahlswe/hyprland-debian-base:0.49.0 AS swaync
+
+LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
+LABEL org.opencontainers.image.source="https://github.com/ErikReider/SwayNotificationCenter"
 
 ARG VERSION=0.12.2
 ARG ARCH=amd64

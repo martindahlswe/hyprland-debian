@@ -1,4 +1,7 @@
-# syntax=docker/dockerfile:1
+##############################################################
+# xdg-desktop-portal-hyprland v1.3.11 
+# xdg-desktop-portal backend for Hyprland  
+##############################################################
 
 FROM docker.io/martindahlswe/hyprland-debian-base:0.49.0 AS xdg-desktop-portal-hyprland
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"

@@ -1,4 +1,7 @@
-# syntax=docker/dockerfile:1
+################################################################################
+# hyprutils v0.10.0
+# Hyprland utilities library used across the ecosystem
+###############################################################################
 
 FROM docker.io/martindahlswe/hyprland-debian-base:0.49.0 AS hyprutils
 LABEL maintainer="Martin Dahl <martindahl16@icloud.com>"
