@@ -1,0 +1,5 @@
+--- a/src/renderer/Renderer.cpp
++++ b/src/renderer/Renderer.cpp
+@@ -1,6 +1,7 @@
+ #include "Renderer.hpp"
++#include <fstream>

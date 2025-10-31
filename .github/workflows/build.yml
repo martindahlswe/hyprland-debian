@@ -1,0 +1,101 @@
+name: Build and Publish Debian Repository
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  DEBIAN_VERSION: trixie
+  REPO_BRANCH: gh-pages
+  OUT_DIR: out
+
+jobs:
+  build:
+    runs-on: self-hosted 
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📦 Checkout main branch (Dockerfiles)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: 🐋 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🧩 Build all components in dependency order
+        run: |
+          set -e
+          declare -a components=(
+            hyprutils
+            hyprlang
+            hyprcursor
+            hyprwayland-scanner
+            hyprland-protocols
+            hyprgraphics
+            hypridle
+            hyprsunset
+            aquamarine
+            hyprtoolkit
+            hyprpaper
+            hyprlock
+            xdg-desktop-portal-hyprland
+            hyprwire
+            hyprland-qtutils
+            hyprland
+            swaync
+          )
+
+          mkdir -p ${OUT_DIR}
+          for comp in "${components[@]}"; do
+            echo "🔧 Building $comp..."
+            docker build -f "components/${comp}.Dockerfile" -t "$comp" .
+            id=$(docker create "$comp")
+            docker cp "$id:/out" "${OUT_DIR}/${comp}"
+            docker rm "$id" >/dev/null
+          done
+
+      - name: 🧭 Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: repo
+          fetch-depth: 0
+
+      - name: 📂 Copy new .debs into gh-pages workspace
+        run: |
+          mkdir -p repo/out
+          rsync -a --delete ${OUT_DIR}/ repo/out/
+
+      - name: 🔑 Import GPG private key for signing
+        env:
+          DEB_GPG_PRIVATE_KEY: ${{ secrets.DEB_GPG_PRIVATE_KEY }}
+        run: |
+          echo "$DEB_GPG_PRIVATE_KEY" | gpg --batch --import -
+          gpg --list-secret-keys
+
+      - name: 🧱 Rebuild Debian repository
+        working-directory: repo
+        env:
+          DEB_GPG_KEY_ID: ${{ secrets.DEB_GPG_KEY_ID }}
+        run: |
+          chmod +x ./rebuild-repo.sh
+          ./rebuild-repo.sh
+
+      - name: 🚀 Commit and push updated repo to gh-pages
+        working-directory: repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "✅ No changes to commit."
+          else
+            git commit -m "📦 Update Debian repo ($(date +'%Y-%m-%d %H:%M:%S'))"
+            git push origin gh-pages
+          fi
+
