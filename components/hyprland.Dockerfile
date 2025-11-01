@@ -57,7 +57,9 @@ Depends: libc6 (>= 2.34), libstdc++6 (>= 12), libpixman-1-0, libxkbcommon0,
  libinput10, libdrm2, libudev1, libseat1, libhyprutils9 (>= 0.10.0),
  libhyprlang2 (>= 0.6.4), libhyprcursor1 (>= 0.1.11),
  libhyprgraphics1 (>= 0.2.0), libaquamarine8 (>= 0.9.5),
- libhyprtoolkit1 (>= 0.1.1), libhyprwire0 (>= 0.1.0)
+ libhyprtoolkit1 (>= 0.1.1), libhyprwire0 (>= 0.1.0),
+ libxcb-composite0, libxcb-res0, libxcb-errors0 , libre2-11,
+ libudis86-0, libdisplay-info2, libzip5, libtomlplusplus3t64 
 Description: Hyprland Wayland compositor (runtime)
 EOF
 

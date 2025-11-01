@@ -47,6 +47,7 @@ jobs:
             hyprwire
             hyprland-qtutils
             hyprland
+            hyprlauncher
             swaync
           )
 
